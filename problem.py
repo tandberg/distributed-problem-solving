@@ -1,43 +1,43 @@
-# from helper import Helper, Lol
+
+
 from node import Node
+from printing import draw_graph
+from mis import MinimalIndependentSet
+from helper import violation_check
 
-# class Problem:
-# 	def __init__(self, ein, to):
-# 		print 'init#Problem', ein, to
-
-
-
-
-
-# # problem = Problem(2,3)
-# # helper = Helper()
-# # helper = Helper()
-# # lol = Lol()
-# # lolaa = Lol()
-
-# for i in xrange(10):
-# 	print i
-
-
-fil = open('input/simple.txt', 'r')
-first = fil.readline()
-nodes = int(first.split(' ')[0])
-edges = int(first.split(' ')[1])
-print "Nodes:", nodes, "Edges:", edges
-
-
+# GLOBALS
 nodelist = []
-for i in range(nodes):
-	line = fil.readline()
-	node = Node(int(line.split(' ')[0]), float(line.split(' ')[1]), float(line.split(' ')[2]))
-	nodelist.append(node)
 
-for i in range(edges):
-	line = fil.readline()
-	node1 = nodelist[int(line.split(' ')[0])]
-	node2 = nodelist[int(line.split(' ')[1])]
+def readinput(inputfile='simple'):
+	fil = open('input/{0}.txt'.format(inputfile), 'r')
+	first = fil.readline()
+	nodes = int(first.split(' ')[0])
+	edges = int(first.split(' ')[1])
+	print "Nodes:", nodes, "Edges:", edges
 
-	node1.addedge(node2)
-	node2.addedge(node1)
+	for i in range(nodes):
+		line = fil.readline()
+		node = Node(int(line.split(' ')[0]), float(line.split(' ')[1]), float(line.split(' ')[2]))
+		nodelist.append(node)
 
-print nodelist
+	for i in range(edges):
+		line = fil.readline()
+		node1 = nodelist[int(line.split(' ')[0])]
+		node2 = nodelist[int(line.split(' ')[1])]
+
+		node1.addedge(node2)
+		node2.addedge(node1)
+
+# Readings
+# readinput('rand-100-4-color1')
+readinput('spiral-500-4-color1')
+
+# Algorithm
+MinimalIndependentSet(nodelist)
+
+# Print violationresults
+violation_check(nodelist)
+
+# Print to screen
+draw_graph(nodelist)
+
