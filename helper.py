@@ -12,7 +12,7 @@ def maxEdges(nodelist):
 # 	for key in nonleaders:
 # 		nonleaders[key].setColor('blue')
 
-def violation_check(nodelist):
+def mis_violation_check(nodelist):
 	nonVisited = 0
 	bothInL = 0
 	noRedNeighbour = 0
@@ -44,3 +44,16 @@ def violation_check(nodelist):
 	print 'Two adjacent nodes both in L\t', bothInL
 	print 'No neighbour in L\t\t', noRedNeighbour
 
+
+def vc_violation_check(nodelist):
+	tally = 0
+	for node in nodelist:
+		for neighbour in node.edges:
+			if node.color == neighbour.color:
+				tally += 1
+		if node.color == 'yellow':
+			tally += 2
+
+	# Double edges
+	tally = tally / 2
+	print '\n\nViolations\t\t', tally

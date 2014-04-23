@@ -7,6 +7,7 @@ class Node:
 		self.color = color
 		self.message = ''
 		self.state = -1
+		self.color_options = {}
 
 	def setColor(self, color):
 		self.color = color
