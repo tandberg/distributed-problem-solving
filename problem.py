@@ -31,7 +31,7 @@ def readinput(inputfile='simple'):
 
 
 
-def main(algorithm='vc', K=3):
+def main(algorithm='vc', K=3, M=304):
 	# Readings
 	readinput('graph-color-1')
 	# readinput('spiral-500-4-color1')
@@ -41,7 +41,7 @@ def main(algorithm='vc', K=3):
 		VertexColoring(nodelist, K)
 		vc_violation_check(nodelist)
 	else:
-		MinimalIndependentSet(nodelist)
+		MinimalIndependentSet(nodelist, M)
 		mis_violation_check(nodelist)
 
 	# Print to screen

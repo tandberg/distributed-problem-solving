@@ -44,7 +44,7 @@ def vc(nodelist, K, d):
 
 		# Round 2
 		for node in nodelist:
-
+			exit
 
 
 

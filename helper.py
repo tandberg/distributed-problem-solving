@@ -43,6 +43,8 @@ def mis_violation_check(nodelist):
 	print '\n\nNode not in L or NL \t\t', nonVisited
 	print 'Two adjacent nodes both in L\t', bothInL
 	print 'No neighbour in L\t\t', noRedNeighbour
+	# print '\n\nViolations:', (nonVisited+bothInL+noRedNeighbour)
+	return nonVisited+bothInL+noRedNeighbour
 
 
 def vc_violation_check(nodelist):
