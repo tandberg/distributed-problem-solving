@@ -18,7 +18,7 @@ def mis_violation_check(nodelist):
 	noRedNeighbour = 0
 
 	for node in nodelist:
-		if node.color == 'yellow':
+		if node.color == 'black':
 			nonVisited += 1
 
 		if node.color == 'red': 
@@ -53,7 +53,7 @@ def vc_violation_check(nodelist):
 		for neighbour in node.edges:
 			if node.color == neighbour.color:
 				tally += 1
-		if node.color == 'yellow':
+		if node.color == 'black':
 			tally += 2
 
 	# Double edges

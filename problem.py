@@ -1,4 +1,3 @@
-
 import sys
 from node import Node
 from printing import draw_graph
@@ -29,12 +28,9 @@ def readinput(inputfile='simple'):
 		node1.addedge(node2)
 		node2.addedge(node1)
 
-
-
-def main(algorithm='vc', K=3, M=304):
+def main(algorithm='vc', file='simple', K=3, M=50):
 	# Readings
-	readinput('graph-color-1')
-	# readinput('spiral-500-4-color1')
+	readinput(file)
 
 	# Algorithms and violationresults
 	if algorithm == 'vc':
@@ -42,13 +38,19 @@ def main(algorithm='vc', K=3, M=304):
 		vc_violation_check(nodelist)
 	else:
 		MinimalIndependentSet(nodelist, M)
-		mis_violation_check(nodelist)
 
 	# Print to screen
 	draw_graph(nodelist)
 
 if __name__ == '__main__':
-	if len(sys.argv) > 2:
-		main(sys.argv[1], sys.argv[2])
-	else:
-		main('mis')
+	# try:
+		if sys.argv[0] == 'vc':
+			main(algorithm=sys.argv[1], file=sys.argv[2], M=int(sys.argv[3]), K=int(sys.argv[4]))
+		elif sys.argv[1] == 'mis':
+			main(algorithm=sys.argv[1], file=sys.argv[2], M=int(sys.argv[3]))
+	# except Exception:
+	# 	print 'Usage:\n\npython problem.py mis file M\n\n\t or\n\npython problem.py vc file M K'
+
+
+
+

@@ -1,5 +1,5 @@
 class Node:
-	def __init__(self, index, x=0, y=0, edges=None, color='yellow'):
+	def __init__(self, index, x=0, y=0, edges=None, color='black'):
 		self.index = index
 		self.y = y
 		self.x = x
