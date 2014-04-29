@@ -1,4 +1,3 @@
-#-*- coding: utf-8 -*-
 from random import random
 import helper
 import math
@@ -21,11 +20,11 @@ class MinimalIndependentSet:
 				msg = 'r1_{0}'.format(i)
 				for node in loners: 
 					if p >= random():
-						node.broadcast(msg)
+						node.broadcastMIS(msg)
 						node.setState(1)
 
 				for node in loners:
-					if node.message == msg:
+					if msg in node.messages:
 						node.setState(0)
 
 				# Round 2
@@ -33,12 +32,15 @@ class MinimalIndependentSet:
 				for node in loners:
 					if node.state == 1:
 						node.setColor('red')
-						node.broadcast(msg)
+						node.broadcastMIS(msg)
 
 				loners = filter((lambda x: x.color == 'black'), nodelist)
 				for node in loners:
-					if node.message == msg:
+					if msg in node.messages:
 						node.setColor('blue')
+
+				for node in loners:
+					node.resetMessages()
 
 			p *= 2
 

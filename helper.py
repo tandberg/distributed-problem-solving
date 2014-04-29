@@ -5,13 +5,6 @@ def maxEdges(nodelist):
 
 	return maximum
 
-# def changecolors(leaders, nonleaders):
-# 	for key in leaders:
-# 		leaders[key].setColor('red')
-
-# 	for key in nonleaders:
-# 		nonleaders[key].setColor('blue')
-
 def mis_violation_check(nodelist):
 	nonVisited = 0
 	bothInL = 0

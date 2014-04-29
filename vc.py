@@ -1,47 +1,75 @@
+from random import random
 import helper
+import math
 
 COLORPALETTE = {
 	0: 'red',
 	1: 'blue',
 	2: 'green',
-	3: 'teal',
+	3: 'yellow',
 	4: 'pink',
 	5: 'orange',
 	6: 'purple',
-	7: 'yellow',
+	7: 'teal',
 	8: 'darkgreen',
 	9: 'greenyellow'
 }
 
-def VertexColoring(nodelist, K):
-	print 'VertexColoring', K
-	vc(nodelist, K, helper.maxEdges(nodelist))
+class VertexColoring:
+	def __init__(self, nodelist, M, K):
+		d = helper.maxEdges(nodelist)
 
-def vc(nodelist, K, d):
-	p = 1.0/d
+		self.algorithm(nodelist, d, M, K)
+		helper.vc_violation_check(nodelist)
 
-	colors = {}
-	for i in range(K):
-		colors[i] = COLORPALETTE[i]
+	def algorithm(self, nodelist, d, M, K):
+		p = 1.0/d
+		N = len(nodelist)
 
-	for node in nodelist:
-		node.color_options = K
+		colors = {}
+		for i in range(K):
+			colors[i] = COLORPALETTE[i]
 
-	while(True):
-		if p >= 1:
-			break
-
-		# Round 1
 		for node in nodelist:
-			c = colors[int(random()*len(colors))]
+			node.setColorOptions(colors)
 
-			if p > random():
-				node.broadcast(c)
-				c.setColor(c)
+		while(p <= 1):
+			for i in xrange(int(M * math.log(N, 2))):
 
-			if node.message == c:
-				exit
+				for node in nodelist:
+					node.maybeRandomUncolor()
 
-		# Round 2
-		for node in nodelist:
-			exit
+				loners = filter(lambda x: x.color == 'black', nodelist)
+
+
+				# Round 1
+				for node in loners:
+					msg = {}
+					if p >= random():
+						node.randomAvailableColor()
+						msg['intend'] = node.tmpColor
+						msg['sender'] = node
+						node.broadcastVC(msg)
+
+				for node in loners:
+					node.sendMsgs()
+
+				for node in loners:
+					msg = {}
+					if node.tmpColor != None:
+						# msg['c'] = node.tmpColor
+						# msg['sender'] = node
+						node.setColor(node.tmpColor)
+						# node.broadcastVC(msg)
+
+				for node in loners:
+					node.sendMsgs()
+
+
+				for node in loners:
+					node.resetMessages()
+
+
+			p *= 2
+
+

@@ -28,14 +28,13 @@ def readinput(inputfile='simple'):
 		node1.addedge(node2)
 		node2.addedge(node1)
 
-def main(algorithm='vc', file='simple', K=3, M=50):
+def main(algorithm='vc', file='simple', M=50, K=3):
 	# Readings
 	readinput(file)
 
 	# Algorithms and violationresults
 	if algorithm == 'vc':
-		VertexColoring(nodelist, K)
-		vc_violation_check(nodelist)
+		VertexColoring(nodelist, M, K)
 	else:
 		MinimalIndependentSet(nodelist, M)
 
@@ -44,7 +43,7 @@ def main(algorithm='vc', file='simple', K=3, M=50):
 
 if __name__ == '__main__':
 	# try:
-		if sys.argv[0] == 'vc':
+		if sys.argv[1] == 'vc':
 			main(algorithm=sys.argv[1], file=sys.argv[2], M=int(sys.argv[3]), K=int(sys.argv[4]))
 		elif sys.argv[1] == 'mis':
 			main(algorithm=sys.argv[1], file=sys.argv[2], M=int(sys.argv[3]))
