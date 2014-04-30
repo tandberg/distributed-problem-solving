@@ -32,11 +32,10 @@ def mis_violation_check(nodelist):
 	# Double edges
 	bothInL = bothInL / 2
 
-
 	print '\n\nNode not in L or NL \t\t', nonVisited
 	print 'Two adjacent nodes both in L\t', bothInL
 	print 'No neighbour in L\t\t', noRedNeighbour
-	# print '\n\nViolations:', (nonVisited+bothInL+noRedNeighbour)
+	print '\n\nTotal Violations:\t\t', (nonVisited+bothInL+noRedNeighbour)
 	return nonVisited+bothInL+noRedNeighbour
 
 

@@ -41,30 +41,22 @@ class VertexColoring:
 
 				loners = filter(lambda x: x.color == 'black', nodelist)
 
-
 				# Round 1
 				for node in loners:
 					msg = {}
 					if p >= random():
 						node.randomAvailableColor()
 						msg['intend'] = node.tmpColor
-						msg['sender'] = node
 						node.broadcastVC(msg)
 
 				for node in loners:
 					node.sendMsgs()
 
+				# Round 2
 				for node in loners:
 					msg = {}
 					if node.tmpColor != None:
-						# msg['c'] = node.tmpColor
-						# msg['sender'] = node
 						node.setColor(node.tmpColor)
-						# node.broadcastVC(msg)
-
-				for node in loners:
-					node.sendMsgs()
-
 
 				for node in loners:
 					node.resetMessages()
